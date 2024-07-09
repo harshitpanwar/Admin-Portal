@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
         console.error('Error fetching user:', error);
         removeJwt();
         setUser(null);
+        setLoading(false);
       }
     };
 
