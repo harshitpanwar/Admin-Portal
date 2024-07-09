@@ -52,9 +52,9 @@ const AdminDashboard = () => {
       password: '',
       role: user.role,
       name: user.name,
-      nationality: user.nationality,
-      idNumber: user.idNumber,
-      mobileNumber: user.mobileNumber
+      // nationality: user.nationality,
+      // idNumber: user.idNumber,
+      // mobileNumber: user.mobileNumber
     });
     setEditModalOpen(true);
   };
@@ -116,9 +116,9 @@ const AdminDashboard = () => {
             <th>Department</th>
             <th>Role</th>
             <th>Name</th>
-            <th>Nationality</th>
+            {/* <th>Nationality</th>
             <th>ID Number</th>
-            <th>Mobile Number</th>
+            <th>Mobile Number</th> */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -129,9 +129,9 @@ const AdminDashboard = () => {
               <td>{user.department}</td>
               <td>{user.role}</td>
               <td>{user.name}</td>
-              <td>{user.nationality}</td>
+              {/* <td>{user.nationality}</td>
               <td>{user.idNumber}</td>
-              <td>{user.mobileNumber}</td>
+              <td>{user.mobileNumber}</td> */}
               <td>
                 <button onClick={() => handleEdit(user)}>Edit</button>
                 <button onClick={() => handleDelete(user)}>Delete</button>
@@ -182,7 +182,7 @@ const AdminDashboard = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
-              <label htmlFor="nationality">Nationality:</label>
+              {/* <label htmlFor="nationality">Nationality:</label>
               <input
                 type="text"
                 id="nationality"
@@ -202,7 +202,7 @@ const AdminDashboard = () => {
                 id="mobileNumber"
                 value={formData.mobileNumber}
                 onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-              />
+              /> */}
               <button type="submit">Update</button>
               <button type="button" onClick={() => setEditModalOpen(false)}>Cancel</button>
             </form>

@@ -20,7 +20,7 @@ const LoginPage = () => {
       if (response.data.role === 'admin' || response.data.role === 'superadmin') {
         navigate('/admin/dashboard');
       } else {
-        navigate('/user-form');
+        navigate('/customer/dashboard');
       }
     } catch (err) {
       console.error('err', err.message)

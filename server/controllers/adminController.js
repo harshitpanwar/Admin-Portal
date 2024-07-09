@@ -28,9 +28,9 @@ exports.createUser = async (req, res) => {
             role,
             department,
             name,
-            nationality,
-            idNumber,
-            mobileNumber,
+            // nationality,
+            // idNumber,
+            // mobileNumber,
         });
 
         // Save the new user
@@ -136,4 +136,3 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ message: 'Error updating user', error: error.message });
     }
 };
-

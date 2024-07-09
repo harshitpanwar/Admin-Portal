@@ -168,7 +168,7 @@ table td button:last-child:hover {
 .modal-content form button[type="button"] {
   background-color: #6c757d;
   color: #fff;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .modal-content form button[type="button"]:hover {

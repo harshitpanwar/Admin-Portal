@@ -25,9 +25,9 @@ const CreateUser = () => {
         role,
         department,
         name,
-        nationality,
-        idNumber,
-        mobileNumber,
+        // nationality,
+        // idNumber,
+        // mobileNumber,
       });
       setError('User created successfully.');
 
@@ -38,11 +38,11 @@ const CreateUser = () => {
   };
 
   return (
-    <div className="create-user-page">
-      <h2>Create User</h2>
+    <div className="create-customer">
+      <h2>Create Staff User</h2>
       <form onSubmit={handleCreateUser}>
         <label>
-          Username:
+          Username:<br/>
           <input
             type="text"
             value={username}
@@ -51,7 +51,7 @@ const CreateUser = () => {
           />
         </label>
         <label>
-          Password:
+          Password:<br/>
           <input
             type="password"
             value={password}
@@ -60,7 +60,7 @@ const CreateUser = () => {
           />
         </label>
         <label>
-          Role:
+          Role:<br/>
           <select value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="user">User</option>
             {user.role === 'superadmin' && <option value="admin">Admin</option>}
@@ -78,15 +78,15 @@ const CreateUser = () => {
           </label>
         )}
         <label>
-          Name:
+          Name:<br/>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        <label>
-          Nationality:
+        {/* <label>
+          Nationality:<br/>
           <input
             type="text"
             value={nationality}
@@ -94,7 +94,7 @@ const CreateUser = () => {
           />
         </label>
         <label>
-          ID Number:
+          ID Number:<br/>
           <input
             type="text"
             value={idNumber}
@@ -102,13 +102,13 @@ const CreateUser = () => {
           />
         </label>
         <label>
-          Mobile Number:
+          Mobile Number:<br/>
           <input
             type="text"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
           />
-        </label>
+        </label> */}
         <button type="submit">Create User</button>
       </form>
       {error && <p className="error-message">{error}</p>}

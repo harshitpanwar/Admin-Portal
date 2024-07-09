@@ -15,8 +15,11 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
+        
         <Link to="/">Home</Link>
-        {user && user.role === 'admin' && <Link to="/admin/dashboard">Dashboard</Link>}
+        {/* {user && (user.role === 'superadmin' || user.role === 'admin') && <Link to="/admin/dashboard">Staff Dashboard</Link>}
+        {user && user.role && <Link to="/customer/dashboard">Customer Dashboard</Link>} */}
+
       </div>
       <div className="navbar-right">
         {user ? (

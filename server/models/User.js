@@ -23,9 +23,9 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Department is required. Please specify a department.']
     },
     name: String,
-    nationality: String,
-    idNumber: String,
-    mobileNumber: String,
+        // nationality: String,
+        // idNumber: String,
+        // mobileNumber: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },  
 });

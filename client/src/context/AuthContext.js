@@ -7,12 +7,14 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
           const response = await axios.get(`${REACT_APP_API_URL}/api/users/me`);
           setUser(response.data);
+          setLoading(false);
       } catch (error) {
         console.error('Error fetching user:', error);
         removeJwt();
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
