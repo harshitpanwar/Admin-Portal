@@ -6,7 +6,6 @@
 
 .content {
   flex: 1; /* Fill remaining space */
-  margin-left: 200px; /* Match sidebar width */
   padding: 20px; /* Padding around main content */
 }
 
