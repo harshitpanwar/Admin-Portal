@@ -1,24 +1,26 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User'); // Adjust the path as necessary
-require('dotenv').config();
-
-const MONGO_URI = process.env.MONGO_URI;
-
-console.log(MONGO_URI)
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch(err => {
-    console.error('Failed to connect to MongoDB', err);
-});
+const User = require('../models/User');
 
 const createSuperAdmin = async () => {
-    const username = 'superadmin';
-    const password = 'superadminpassword'; // Change to a secure password
+
+    try {
+    const superAdminUsername = process.env.SUPERADMIN_USERNAME;
+    const superAdminPassword = process.env.SUPERADMIN_PASSWORD;
+
+    if (!superAdminUsername || !superAdminPassword) throw new Error('Super Admin credentials not found');
+
+    const username = process.env.SUPERADMIN_USERNAME;
+    const password = process.env.SUPERADMIN_PASSWORD;
     const hashedPassword = await bcrypt.hash(password, 8);
+
+    //check if superadmin exists
+    const superAdminExists = await User.findOne({ role: 'superadmin' });
+
+    //if superadmin exists, delete it
+    if (superAdminExists) {
+        await User.deleteOne({ role: 'superadmin' });
+        console.log('Super Admin deleted successfully');
+    }
 
     const superAdmin = new User({
         username,
@@ -28,14 +30,11 @@ const createSuperAdmin = async () => {
         department: 'admin-reserved-department'
     });
 
-    try {
         await superAdmin.save();
         console.log('Super Admin created successfully');
-        mongoose.connection.close();
     } catch (error) {
         console.error('Error creating Super Admin', error);
-        mongoose.connection.close();
     }
 };
 
-createSuperAdmin();
+module.exports = { createSuperAdmin };

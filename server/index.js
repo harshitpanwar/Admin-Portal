@@ -36,6 +36,14 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
     console.error('MongoDB Connection Error:', err);
 });
 
+// after DB connection is successful, create super admin
+mongoose.connection.once('open', () => {
+    if(process.env.SUPERADMIN_USERNAME && process.env.SUPERADMIN_PASSWORD) {
+        const {createSuperAdmin} =  require('./utils/createSuperAdmin');
+        createSuperAdmin();
+    }
+});
+
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
