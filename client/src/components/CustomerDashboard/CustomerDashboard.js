@@ -17,6 +17,7 @@ const CustomerDashboard = () => {
     const [pageSize, setPageSize] = useState(10);
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
@@ -26,6 +27,7 @@ const CustomerDashboard = () => {
 
     const fetchCustomers = async () => {
         try {
+            setLoading(true);
             const response = await axios.get('/customers', {
                 params: { page: currentPage, pageSize, from: fromDate, to: toDate },
             });
@@ -33,6 +35,9 @@ const CustomerDashboard = () => {
             setTotalPages(response.data.totalPages || 1);
         } catch (error) {
             console.error('Error fetching customers:', error);
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -57,6 +62,9 @@ const CustomerDashboard = () => {
         setToDate(e.target.value);
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className="customer-dashboard">
             <h1>Customer Dashboard</h1>
