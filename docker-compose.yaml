@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build:
+      context: ./server
+    container_name: server
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI
+      - PORT
+      - JWT_SECRET
+      - ADMIN_DEPARTMENT
+    depends_on:
+      - mongo
+
+  client:
+    build:
+      context: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL
+    depends_on:
+      - server
+
+volumes:
+  mongo-data:
