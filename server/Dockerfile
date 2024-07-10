@@ -16,7 +16,5 @@ COPY . .
 # Expose the port your server is running on
 EXPOSE 5000
 
-RUN node ./utils/createSuperAdmin.js
-
 # Start the server
 CMD ["npm", "start"]

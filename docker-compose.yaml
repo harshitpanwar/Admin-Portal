@@ -14,11 +14,8 @@ services:
     container_name: server
     ports:
       - "5000:5000"
-    environment:
-      - MONGO_URI
-      - PORT
-      - JWT_SECRET
-      - ADMIN_DEPARTMENT
+    env_file:
+      - ./server/.env
     depends_on:
       - mongo
 
@@ -28,8 +25,8 @@ services:
     container_name: client
     ports:
       - "3000:3000"
-    environment:
-      - REACT_APP_API_URL
+    env_file:
+      - ./client/.env
     depends_on:
       - server
 

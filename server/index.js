@@ -30,7 +30,9 @@ app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api', require('./routes/customerRoutes'));
 // MongoDB Connection
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://mongo:27017/adminportal';
+
+mongoose.connect(MONGO_URI).then(() => {
     console.log('MongoDB Connected');
 }).catch(err => {
     console.error('MongoDB Connection Error:', err);
