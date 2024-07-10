@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const CreateCustomer = () => {
     const [name, setName] = useState('');
-    const [department, setDepartment] = useState('');
+    const [department, setDepartment] = useState('Sharjah golf and shooting club');
     const [nationality, setNationality] = useState('');
     const [idNumber, setIdNumber] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
@@ -25,7 +25,7 @@ const CreateCustomer = () => {
                 mobileNumber,
             });
             setError('Customer Create Successfully')
-            // navigate('/customer/dashboard');
+            navigate('/customer/dashboard');
         } catch (error) {
             setError(error.message);
             console.error('Error creating customer:', error);
@@ -48,18 +48,22 @@ const CreateCustomer = () => {
                 {
                     user.role === 'superadmin' &&                 
                     <label>
-                    Department:
-                    <input
+                    Department: <br/>
+                    {/* <input
                         type="text"
                         value={department}
                         onChange={(e) => setDepartment(e.target.value)}
                         required
-                    />
+                    /> */}
+                    <select value={department} onChange={(e) => setDepartment(e.target.value)}>
+                        <option value="Sharjah golf and shooting club">Sharjah golf and shooting club</option>
+                        <option value="نادي الذيد الرياضي الثقافي">نادي الذيد الرياضي الثقافي</option>
+                    </select>
                 </label>
                 }
 
                 <label>
-                    Nationality:
+                    Nationality: <br/>
                     <input
                         type="text"
                         value={nationality}
@@ -67,7 +71,7 @@ const CreateCustomer = () => {
                     />
                 </label>
                 <label>
-                    ID Number:
+                    ID Number: <br/>
                     <input
                         type="text"
                         value={idNumber}
@@ -75,7 +79,7 @@ const CreateCustomer = () => {
                     />
                 </label>
                 <label>
-                    Mobile Number:
+                    Mobile Number: <br/>
                     <input
                         type="text"
                         value={mobileNumber}

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from '../../utils/axiosConfig';
 import EditCustomerModal from '../EditCustomerModal/EditCustomerModal';
 import DeleteCustomerModal from '../DeleteCustomerModal/DeleteCustomerModal';
 import '../AdminDashboard/AdminDashboard.css';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const CustomerDashboard = () => {
     const [customers, setCustomers] = useState([]);
@@ -17,6 +18,7 @@ const CustomerDashboard = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         fetchCustomers();
@@ -75,7 +77,7 @@ const CustomerDashboard = () => {
                         <th>ID Number</th>
                         <th>Mobile Number</th>
                         <th>Department</th>
-                        <th>Actions</th>
+                        {user.role !== 'user' && <th>Actions</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -86,10 +88,13 @@ const CustomerDashboard = () => {
                             <td>{customer.idNumber}</td>
                             <td>{customer.mobileNumber}</td>
                             <td>{customer.department}</td>
-                            <td>
-                                <button onClick={() => handleEdit(customer)}>Edit</button>
-                                <button onClick={() => handleDelete(customer._id)}>Delete</button>
-                            </td>
+                            {
+                                user.role !== 'user' &&
+                                <td>
+                                    <button onClick={() => handleEdit(customer)}>Edit</button>
+                                    <button onClick={() => handleDelete(customer._id)}>Delete</button>
+                                </td>
+                            }
                         </tr>
                     ))}
                 </tbody>

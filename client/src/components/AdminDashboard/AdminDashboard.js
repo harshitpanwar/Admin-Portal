@@ -98,7 +98,7 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
-      <div className="filter-container">
+      {/* <div className="filter-container">
         <label htmlFor="fromDate">From: </label>
         <input
           type="date"
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
           value={toDate}
           onChange={(e) => setToDate(e.target.value)}
         />
-      </div>
+      </div> */}
       <button className="create-user-button" onClick={handleCreateUser}>Create User</button>
       <table>
         <thead>

@@ -3,18 +3,20 @@ import React, { useContext, useState } from 'react';
 import axios from '../../utils/axiosConfig';
 import './CreateUser.css'
 import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user'); // Default role for normal users
-  const [department, setDepartment] = useState(''); // State for department selection
+  const [department, setDepartment] = useState('Sharjah golf and shooting club'); // State for department selection
   const [name, setName] = useState('');
   const [nationality, setNationality] = useState('');
   const [idNumber, setIdNumber] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [error, setError] = useState('');
   const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleCreateUser = async (event) => {
     event.preventDefault();
@@ -30,6 +32,7 @@ const CreateUser = () => {
         // mobileNumber,
       });
       setError('User created successfully.');
+      navigate('/admin/dashboard');
 
     } catch (error) {
       setError(error?.response?.data?.message);
@@ -68,13 +71,18 @@ const CreateUser = () => {
         </label>
         {user.role === 'superadmin' && (
           <label>
-            Department:
-            <input
+            Department: <br/>
+            {/* <input
               type="text"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               required
-            />
+            /> */}
+          <select value={department} onChange={(e) => setDepartment(e.target.value)}>
+            <option value="Sharjah golf and shooting club">Sharjah golf and shooting club</option>
+            <option value="نادي الذيد الرياضي الثقافي">نادي الذيد الرياضي الثقافي</option>
+          </select>
+
           </label>
         )}
         <label>
