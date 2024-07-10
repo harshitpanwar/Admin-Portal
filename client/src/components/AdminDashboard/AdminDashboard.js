@@ -12,6 +12,7 @@ const AdminDashboard = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: '',
     role: '',
@@ -31,6 +32,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
+      setLoading(true);
       const response = await axios.get('/admin/users', {
         params: {
           page: currentPage,
@@ -43,6 +45,8 @@ const AdminDashboard = () => {
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error('Error fetching users:', error);
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -89,6 +93,8 @@ const AdminDashboard = () => {
     navigate('/admin/create-user');
   };
 
+  if(loading) return <div> Loading ... </div>
+
   return (
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
@@ -134,7 +140,7 @@ const AdminDashboard = () => {
               <td>{user.mobileNumber}</td> */}
               <td>
                 <button onClick={() => handleEdit(user)}>Edit</button>
-                <button onClick={() => handleDelete(user)}>Delete</button>
+                {user.role!=='superadmin' && <button onClick={() => handleDelete(user)}>Delete</button> }
               </td>
             </tr>
           ))}
