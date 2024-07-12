@@ -66,15 +66,17 @@ const CustomerDashboard = () => {
         return <div>Loading...</div>;
     }
     return (
-        <div className="customer-dashboard">
+        <div className="admin-dashboard">
             <h1>Customer Dashboard</h1>
             <div className="filter-container">
-            <label htmlFor="fromDate">From: </label>
-
-                <input type="date" value={fromDate} onChange={handleFromDateChange} />
-                <label htmlFor="fromDate">To: </label>
-
-                <input type="date" value={toDate} onChange={handleToDateChange} />
+                <React.Fragment>
+                    <label htmlFor="fromDate">From: </label>
+                    <input type="date" value={fromDate} onChange={handleFromDateChange} />
+                </React.Fragment>
+                <React.Fragment>
+                    <label htmlFor="fromDate">To: </label>
+                    <input type="date" value={toDate} onChange={handleToDateChange} />
+                </React.Fragment>
             </div>
             <button className="create-user-button" onClick={handleCreateCustomer}>Create Customer</button>
             <table>

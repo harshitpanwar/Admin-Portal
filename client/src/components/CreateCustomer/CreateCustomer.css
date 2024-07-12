@@ -4,14 +4,14 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #0e1320;
     padding: 20px;
 }
 
 .create-customer h1 {
     margin-bottom: 20px;
     font-size: 2em;
-    color: #333;
+    color: #fff;
 }
 
 .create-customer form {
@@ -19,7 +19,7 @@
     flex-direction: column;
     width: 300px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #282e28;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +27,7 @@
 .create-customer label {
     margin-bottom: 10px;
     font-size: 1em;
-    color: #555;
+    color: #fff;
 }
 
 .create-customer input {
@@ -36,6 +36,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1em;
+    width: -webkit-fill-available;
 }
 
 .create-customer button {
