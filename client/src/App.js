@@ -47,7 +47,8 @@ const App = () => {
   return (
     <div>
       <Router>
-        <Navbar/>
+        {user && user.role && <Navbar/>}
+        {/* <Navbar/> */}
 
         <div className="app-container">
           {user && user.role && <Sidebar/>}
