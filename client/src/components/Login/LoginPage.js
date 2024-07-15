@@ -16,6 +16,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`auth/login`, { username, password });
+
+      localStorage.setItem('token', response.data.token);
       setUser(response.data.user);
       if (response.data.role === 'admin' || response.data.role === 'superadmin') {
         navigate('/admin/dashboard');
