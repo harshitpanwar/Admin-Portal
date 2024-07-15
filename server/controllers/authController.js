@@ -19,8 +19,7 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-
-        const token = generateToken(user._id, user.role, '1d');
+        const token = generateToken(user._id, user.role);
         // res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'None' });
         res.json({ 
             token,
