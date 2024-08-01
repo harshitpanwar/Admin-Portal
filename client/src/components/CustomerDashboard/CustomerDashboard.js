@@ -41,6 +41,33 @@ const CustomerDashboard = () => {
         }
     };
 
+    const downloadCsv = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('/admin/users/download', {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'customers.csv');
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+
+        } catch (error) {
+            console.error('Error downloading customers:', error);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+            
+
     const handleCreateCustomer = () => {
         navigate('/customer/create-customer')
     }
@@ -78,7 +105,12 @@ const CustomerDashboard = () => {
                     <input type="date" value={toDate} onChange={handleToDateChange} />
                 </React.Fragment>
             </div>
-            <button className="create-user-button" onClick={handleCreateCustomer}>Create Customer</button>
+            <div className='customer-button'>
+                <button className="create-user-button" onClick={handleCreateCustomer}>Create Customer</button>
+                {   
+                    user.role !== 'user' && <button className="create-user-button" onClick={downloadCsv}>Download Customers CSV</button>
+                }
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -87,6 +119,7 @@ const CustomerDashboard = () => {
                         <th>ID Number</th>
                         <th>Mobile Number</th>
                         <th>Department</th>
+                        <th>Date</th>
                         {user.role !== 'user' && <th>Actions</th>}
                     </tr>
                 </thead>
@@ -98,6 +131,7 @@ const CustomerDashboard = () => {
                             <td>{customer.idNumber}</td>
                             <td>{customer.mobileNumber}</td>
                             <td>{customer.department}</td>
+                            <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
                             {
                                 user.role !== 'user' &&
                                 <td>

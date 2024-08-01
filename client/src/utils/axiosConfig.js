@@ -23,4 +23,18 @@ instance.interceptors.request.use(
   }
 );
 
+// on response, if token is expired, redirect to login
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      window.localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default instance;

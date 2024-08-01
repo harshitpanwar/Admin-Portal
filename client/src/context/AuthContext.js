@@ -22,8 +22,12 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
-    fetchUser();
+    if(localStorage.getItem('token')){
+      fetchUser();
+    }
+    else {
+      setLoading(false);
+    }
   }, []);
 
   const logout = () => {

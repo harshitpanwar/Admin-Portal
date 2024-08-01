@@ -8,5 +8,6 @@ router.post('/create-user', adminAuth, adminController.createUser);
 router.get('/users', adminAuth, adminController.getAllUsersInDepartment);
 router.put('/users/:id', adminAuth, adminController.updateUser);
 router.delete('/users/:id', adminAuth, adminController.deleteUser);
+router.get('/users/download', adminAuth, adminController.downloadCustomersCSV);
 
 module.exports = router;

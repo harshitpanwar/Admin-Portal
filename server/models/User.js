@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
         // mobileNumber: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },  
+    lastRequestAt: { type: Date, default: Date.now },
 });
 
 const User = mongoose.model('User', userSchema);

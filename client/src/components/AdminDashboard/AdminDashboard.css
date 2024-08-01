@@ -40,6 +40,13 @@
   background-color: #0056b3;
 }
 
+.customer-button {
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

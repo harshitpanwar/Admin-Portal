@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const { parse } = require('json2csv');
+const Customer = require('../models/Customer');
 
 exports.createUser = async (req, res) => {
 
@@ -136,3 +138,27 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ message: 'Error updating user', error: error.message });
     }
 };
+
+exports.downloadCustomersCSV = async (req, res) => {
+  try {
+
+    const fields = ['name', 'nationality', 'idNumber', 'mobileNumber', 'department', 'createdAt'];
+    const opts = { fields };
+    
+    let filterCondition = {};
+
+    if(req.user.department !== 'admin-reserved-department'){
+      filterCondition = { department: req.user.department }
+    }
+
+    const customers = await Customer.find(filterCondition).sort({createdAt: -1}).exec();
+    const csv = parse(customers, opts);
+
+    res.attachment('customers.csv');
+
+    res.status(200).send(csv);
+    
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
